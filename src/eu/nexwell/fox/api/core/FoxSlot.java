@@ -51,6 +51,13 @@ public class FoxSlot {
 		return intArray;
 	}
 	
+	protected Byte[] readGet(int minSize) throws FoxException {
+		Byte[] bytes = readGet();
+		if (bytes.length < minSize)
+			throw new FoxException("Read value list too short");
+		return bytes;
+	}
+	
 	protected int convertArg(int value, int minValue, int maxValue, int scale) {
 		if (value < minValue)
 			value = minValue;

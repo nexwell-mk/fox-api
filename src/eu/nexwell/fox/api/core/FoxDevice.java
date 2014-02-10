@@ -34,6 +34,23 @@ public class FoxDevice {
 		parentSystem.write(msg);
 	}
 	
+	public FoxSlot getSlot(int index) throws FoxException {
+		try {
+			return slots.get(index);
+		}
+		catch (IndexOutOfBoundsException ex) {
+			throw new FoxException("Index out of range");
+		}
+	}
+	
+	public FoxSlot[] getSlots() {
+		ArrayList<FoxSlot> slots = new ArrayList<FoxSlot>();
+		for (FoxSlot s : this.slots)
+			slots.add(s);
+		FoxSlot[] array = new FoxSlot[slots.size()];
+		return (FoxSlot[]) slots.toArray(array);
+	}
+	
 	protected void addSlot(FoxSlot slot) {
 		slot.setParentDevice(this);
 		slots.add(slot);
