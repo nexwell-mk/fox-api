@@ -21,10 +21,10 @@ class FoxMessageSet extends FoxMessage {
 		slotIndex = index;
 	}
 	
-	void setArgs(ArrayList<Integer> args) {
+	void setArgs(ArrayList<Byte> args) {
 		StringBuilder builder = new StringBuilder();
-		for (Integer i : args) {
-			builder.append(i);
+		for (Byte i : args) {
+			builder.append(i & 0xff);
 			builder.append(" ");
 		}
 		setArgs = builder.toString().trim();

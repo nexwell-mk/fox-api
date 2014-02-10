@@ -1,5 +1,6 @@
 package eu.nexwell.fox.api.core;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 
@@ -19,14 +20,20 @@ public class FoxSlot {
 		FoxMessageSet msg = new FoxMessageSet();
 		msg.setDevice(parentDevice);
 		msg.setSlotIndex(getIndex());
-		ArrayList<Integer> argsList = new ArrayList<Integer>();
-		for (Integer i : args)
-			argsList.add(i);
+		ArrayList<Byte> argsList = new ArrayList<Byte>();
+		for (Integer i : args) {
+			byte[] bytes = BigInteger.valueOf(i).toByteArray();
+			for (int bi = 0; bi < bytes.length; bi++) {
+				byte b = bytes[(bytes.length - 1) - bi];
+				if (bi < bytes.length - 1 || b != 0 || bytes.length == 1)
+					argsList.add(b);
+			}
+		}
 		msg.setArgs(argsList);
 		parentDevice.getParentSystem().write(msg);
 	}
 	
-	protected Integer[] readGet() throws FoxException {
+	protected Byte[] readGet() throws FoxException {
 		FoxMessageGet msgGet = new FoxMessageGet();
 		msgGet.setDevice(parentDevice);
 		msgGet.setSlotIndex(getIndex());
@@ -38,10 +45,19 @@ public class FoxSlot {
 		if (msgTake.getIndex() != getIndex())
 			throw new FoxException("Unexpected slot index");
 		String[] strArray = msgTake.getArgs().split(" ");
-		Integer[] intArray = new Integer[strArray.length];
+		Byte[] intArray = new Byte[strArray.length];
 		for(int i = 0; i < strArray.length; i++)
-		    intArray[i] = Integer.parseInt(strArray[i]);
+		    intArray[i] = Byte.parseByte(strArray[i]);
 		return intArray;
+	}
+	
+	protected int convertArg(int value, int minValue, int maxValue, int scale) {
+		if (value < minValue)
+			value = minValue;
+		if (value > maxValue)
+			value = maxValue;
+		value /= scale;
+		return value;
 	}
 	
 	void setParentDevice(FoxDevice device) {

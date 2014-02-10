@@ -14,6 +14,7 @@ public class FoxApiTester {
 			FoxMessengerTcpIp messenger = new FoxMessengerTcpIp();
 			messenger.setHost("fox");
 			messenger.setTimeout(100);
+			messenger.setPrintStream(System.out);
 			messenger.open();
 			fox.setMessenger(messenger);
 			

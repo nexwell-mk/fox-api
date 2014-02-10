@@ -3,8 +3,11 @@ package eu.nexwell.fox.api.connection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import eu.nexwell.fox.api.core.FoxException;
 import eu.nexwell.fox.api.core.FoxMessenger;
@@ -14,6 +17,7 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 	String host = "";
 	int port = 0;
 	int timeout = 250;
+	PrintStream printStream = null;
 	
 	Socket socket;
 	PrintWriter toServer;
@@ -40,6 +44,10 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 		this.timeout = timeout;
 	}
 	
+	public void setPrintStream(PrintStream printStream) {
+		this.printStream = printStream;
+	}
+	
 	@Override
 	public void open() throws FoxException {
 		try {
@@ -54,17 +62,23 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 			throw new FoxException(e.getMessage());
 		}
 	}
+	
+	private void printData(boolean toSystem, String text) {
+		if (printStream != null && text.startsWith("@"))
+			System.out.println(String.format("%s Fox %s App %s",
+					(new SimpleDateFormat("HH:mm:ss.SSS")).format(Calendar.getInstance().getTime()),
+					toSystem ? "<--" : "-->",
+					text.trim()));
+	}
 
 	@Override
 	public void write(String text) throws FoxException {
 		toServer.println(text);
-		String echo = read();
-		if (!echo.equals(text.trim()))
-			throw new FoxException("Wrong echo received");
+		printData(true, text);
+		readEcho(text);
 	}
-
-	@Override
-	public String read() {
+	
+	private String readLine() {
 		try {
 			String line = fromServer.readLine();
 			if (line == null)
@@ -73,6 +87,19 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 		} catch (IOException e) {
 			return "";
 		}
+	}
+	
+	private void readEcho(String text) throws FoxException {
+		String echo = readLine();
+		if (!echo.equals(text.trim()))
+			throw new FoxException("Wrong echo received");
+	}
+
+	@Override
+	public String read() {
+		String text = readLine();
+		printData(false, text);
+		return text;
 	}
 
 	@Override

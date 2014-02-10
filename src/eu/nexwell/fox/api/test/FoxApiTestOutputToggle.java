@@ -16,8 +16,18 @@ public class FoxApiTestOutputToggle implements FoxApiTest {
 		FoxSlotOutput foxOutput = foxOut.getOutput(0);
 		
 		foxOutput.toggle();
-		System.out.println(foxOutput.isTurnedOn());
+		System.out.println(foxOutput.isOn());
 		
+		/*
+		foxOutput.pulse(5);
+		foxOutput.pulse(25);
+		foxOutput.pulse(100);
+		foxOutput.pulse(1000);
+		foxOutput.pulse(5000);
+		foxOutput.pulse(50000);
+		foxOutput.flash(1000);
+		foxOutput.pwm(250, 2000-250);
+		*/
 	}
 
 }
