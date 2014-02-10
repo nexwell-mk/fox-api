@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class FoxMessageMe extends FoxMessage {
 
-	private String type;
-	private String version;
+	private String type = "";
+	private String version = "";
 	
 	@Override
 	protected void prepareMessage() {

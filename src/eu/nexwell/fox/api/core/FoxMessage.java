@@ -8,6 +8,10 @@ abstract class FoxMessage {
 	protected String message;
 	
 	public FoxMessage() {
+		reset();
+	}
+	
+	void reset() {
 		appToken = "app";
 		setDeviceAll();
 		message = "";
@@ -36,11 +40,12 @@ abstract class FoxMessage {
 	}
 	
 	void interpret(String data) {
+		reset();
 		if (data.matches("@[^ ]+:[^ ]+ .+")) {
 			appToken = data.substring(data.indexOf("@") + 1, data.indexOf(":"));
 			devToken = data.substring(data.indexOf(":") + 1, data.indexOf(" "));
 			message = data.substring(data.indexOf(" ") + 1);
-			interpretMessage();
 		}
+		interpretMessage();
 	}
 }

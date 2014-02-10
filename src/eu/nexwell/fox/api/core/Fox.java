@@ -51,7 +51,8 @@ public class Fox {
 		ArrayList<FoxDevice> devices = new ArrayList<FoxDevice>();
 		for (FoxDevice dev : this.devices.values())
 			devices.add(dev);
-		return (FoxDevice[]) devices.toArray();
+		FoxDevice[] array = new FoxDevice[devices.size()];
+		return (FoxDevice[]) devices.toArray(array);
 	}
 	
 	public FoxDevice[] searchDevices() throws FoxException {
@@ -86,7 +87,8 @@ public class Fox {
 			if (device != null)
 				devices.add(device);
 		}
-		return (FoxDevice[]) devices.toArray();
+		FoxDevice[] array = new FoxDevice[devices.size()];
+		return (FoxDevice[]) devices.toArray(array);
 	}
 	
 	public void reboot() throws FoxException {

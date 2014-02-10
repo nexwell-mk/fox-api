@@ -10,10 +10,10 @@ public class FoxApiTestOutputToggle implements FoxApiTest {
 	@Override
 	public void run(Fox fox) throws FoxException {
 		
-		FoxDeviceOut foxOut = new FoxDeviceOut(0);
+		FoxDeviceOut foxOut = new FoxDeviceOut(1);
 		fox.addDevice(foxOut);
 		
-		FoxSlotOutput foxOutput = foxOut.getOutput(2);
+		FoxSlotOutput foxOutput = foxOut.getOutput(0);
 		
 		foxOutput.toggle();
 		System.out.println(foxOutput.isTurnedOn());
