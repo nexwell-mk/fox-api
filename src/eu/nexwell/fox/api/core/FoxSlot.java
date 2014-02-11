@@ -59,11 +59,14 @@ public class FoxSlot {
 	}
 	
 	protected int convertArg(int value, int minValue, int maxValue, int scale) {
+		return convertArg(value, minValue, maxValue) / scale;
+	}
+	
+	protected int convertArg(int value, int minValue, int maxValue) {
 		if (value < minValue)
 			value = minValue;
 		if (value > maxValue)
 			value = maxValue;
-		value /= scale;
 		return value;
 	}
 	

@@ -20,8 +20,8 @@ public class FoxApiTester {
 			
 			FoxApiTest test;
 			
-			//test = new FoxApiTestOutputToggle();
-			test = new FoxApiTestSearch();
+			test = new FoxApiTestOutputToggle();
+			//test = new FoxApiTestSearch();
 			
 			test.run(fox);
 			

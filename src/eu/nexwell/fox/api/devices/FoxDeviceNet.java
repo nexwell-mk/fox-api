@@ -8,7 +8,6 @@ public class FoxDeviceNet extends FoxDevice {
 	public FoxDeviceNet(int address) throws FoxException {
 		super(address);
 		type = "Fox NET";
-		// TODO Auto-generated constructor stub
 	}
 
 }

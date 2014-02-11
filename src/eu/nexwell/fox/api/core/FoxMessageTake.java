@@ -20,7 +20,7 @@ class FoxMessageTake extends FoxMessage {
 			Scanner scanner = new Scanner (message);
 			scanner.next();
 			slotIndex = scanner.nextInt();
-			takeArgs = scanner.next();
+			takeArgs = scanner.nextLine().trim();
 			scanner.close();
 		}
 	}

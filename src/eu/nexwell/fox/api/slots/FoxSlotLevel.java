@@ -14,7 +14,7 @@ public class FoxSlotLevel extends FoxSlot {
 	}
 	
 	public void turnOn(int level) throws FoxException {
-		writeSet(0x10, convertArg(level, 1, 255, 1));
+		writeSet(0x10, convertArg(level, 1, 255));
 	}
 	
 	public void turnOff() throws FoxException {
@@ -26,7 +26,7 @@ public class FoxSlotLevel extends FoxSlot {
 	}
 	
 	public void toggle(int level) throws FoxException {
-		writeSet(0x12, convertArg(level, 1, 255, 1));
+		writeSet(0x12, convertArg(level, 1, 255));
 	}
 	
 	public void stopSweep() throws FoxException {
