@@ -47,7 +47,7 @@ public class FoxSlot {
 		String[] strArray = msgTake.getArgs().split(" ");
 		Byte[] intArray = new Byte[strArray.length];
 		for(int i = 0; i < strArray.length; i++)
-		    intArray[i] = Byte.parseByte(strArray[i]);
+		    intArray[i] = (byte) Integer.parseInt(strArray[i]);
 		return intArray;
 	}
 	

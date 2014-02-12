@@ -9,8 +9,8 @@ public class FoxSlotThermometer extends FoxSlot {
 		
 	}
 	
-	public float getTemperature() throws FoxException {
-		Byte[] state = readGet(2);
-		return 256*state[1] + (state[0] & 0xff);
+	public double getTemperature() throws FoxException {
+		Byte[] state = readGet(3);
+		return (256*state[2] + (state[1] & 0xff)) / 10.0;
 	}
 }

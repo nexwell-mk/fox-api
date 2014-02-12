@@ -13,7 +13,7 @@ public class FoxSlotThermostate extends FoxSlot {
 		writeSet(0x01);
 	}
 	
-	public void turnOn(float temperatureThreshold) throws FoxException {
+	public void turnOn(double temperatureThreshold) throws FoxException {
 		writeSet(0x01, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
 	}
 	
@@ -25,19 +25,19 @@ public class FoxSlotThermostate extends FoxSlot {
 		writeSet(0x02);
 	}
 	
-	public void toggle(float temperatureThreshold) throws FoxException {
+	public void toggle(double temperatureThreshold) throws FoxException {
 		writeSet(0x02, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
 	}
 	
-	public void setThreshold(float temperatureThreshold) throws FoxException {
+	public void setThreshold(double temperatureThreshold) throws FoxException {
 		writeSet(0x10, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
 	}
 	
 	public boolean isOn() throws FoxException {
-		return readGet(1)[0] != 0x00;
+		return readGet(2)[1] != 0x00;
 	}
 	
 	public boolean isActive() throws FoxException {
-		return readGet(2)[1] != 0x00;
+		return readGet(1)[0] != 0x00;
 	}
 }

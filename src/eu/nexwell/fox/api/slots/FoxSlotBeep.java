@@ -18,6 +18,6 @@ public class FoxSlotBeep extends FoxSlot {
 	}
 	
 	public void play(int freqHz, int timeMillisec) throws FoxException {
-		writeSet(0x41, convertArg(freqHz, 25, 5000, 25), convertArg(timeMillisec, 25, 5000, 25));
+		writeSet(0x41, convertArg(freqHz, 100, 5000, 25), convertArg(timeMillisec, 25, 5000, 25));
 	}
 }

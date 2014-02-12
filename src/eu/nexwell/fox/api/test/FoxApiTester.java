@@ -13,14 +13,14 @@ public class FoxApiTester {
 			
 			FoxMessengerTcpIp messenger = new FoxMessengerTcpIp();
 			messenger.setHost("fox");
-			messenger.setTimeout(100);
+			messenger.setTimeout(250);
 			messenger.setPrintStream(System.out);
 			messenger.open();
 			fox.setMessenger(messenger);
 			
 			FoxApiTest test;
 			
-			test = new FoxApiTestOutputToggle();
+			test = new FoxApiTestSlots();
 			//test = new FoxApiTestSearch();
 			
 			test.run(fox);

@@ -26,7 +26,7 @@ public class Fox {
 		this.messenger = messenger;
 	}
 	
-	public void addDevice(FoxDevice dev) throws FoxException {
+	public FoxDevice addDevice(FoxDevice dev) throws FoxException {
 		if (dev == null)
 			throw new FoxException("Null device");
 		if (devices.size() >= maxDevicesCount)
@@ -35,12 +35,14 @@ public class Fox {
 			throw new FoxException(String.format("Device with address %d already added", dev.getAddress()));
 		dev.setParentSystem(this);
 		devices.put(dev.getAddress(), dev);
+		return dev;
 	}
 	
-	public void addDevices(FoxDevice[] devs) throws FoxException {
+	public FoxDevice[] addDevices(FoxDevice[] devs) throws FoxException {
 		for (FoxDevice dev : devs) {
 			addDevice(dev);
 		}
+		return devs;
 	}
 	
 	public FoxDevice getDevice(int address) {

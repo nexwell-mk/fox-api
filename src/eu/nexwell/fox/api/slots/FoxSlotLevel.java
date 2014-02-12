@@ -17,6 +17,10 @@ public class FoxSlotLevel extends FoxSlot {
 		writeSet(0x10, convertArg(level, 1, 255));
 	}
 	
+	public void turnOn(double level) throws FoxException {
+		turnOn((int)(255*level));
+	}
+	
 	public void turnOff() throws FoxException {
 		writeSet(0x00);
 	}
@@ -27,6 +31,10 @@ public class FoxSlotLevel extends FoxSlot {
 	
 	public void toggle(int level) throws FoxException {
 		writeSet(0x12, convertArg(level, 1, 255));
+	}
+	
+	public void toggle(double level) throws FoxException {
+		toggle((int)(255*level));
 	}
 	
 	public void stopSweep() throws FoxException {
@@ -49,7 +57,7 @@ public class FoxSlotLevel extends FoxSlot {
 		return readGet(1)[0] != 0x00;
 	}
 	
-	public int getLevel() throws FoxException {
-		return readGet(2)[1];
+	public double getLevel() throws FoxException {
+		return readGet(2)[1] / 255.0;
 	}
 }
