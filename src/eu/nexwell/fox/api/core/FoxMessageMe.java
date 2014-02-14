@@ -2,7 +2,7 @@ package eu.nexwell.fox.api.core;
 
 import java.util.Scanner;
 
-public class FoxMessageMe extends FoxMessage {
+class FoxMessageMe extends FoxMessage {
 
 	private String type = "";
 	private String version = "";

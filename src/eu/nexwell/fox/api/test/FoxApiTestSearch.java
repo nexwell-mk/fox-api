@@ -13,7 +13,7 @@ public class FoxApiTestSearch implements FoxApiTest {
 		
 		for (FoxDevice dev : fox.getDevices())
 			System.out.println(String.format("FoxDevice address: %02d, type: %s",
-					dev.getAddress(), dev.getType()));
+					dev.getAddress(), dev.getTypeString()));
 		
 	}
 

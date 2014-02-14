@@ -32,7 +32,6 @@ class FoxMessageSet extends FoxMessage {
 
 	@Override
 	protected void interpretMessage() {
-		// TODO Auto-generated method stub
 		
 	}
 

@@ -37,7 +37,7 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 		if (colon < 1)
 			setHost(host, 23);
 		else
-			setHost(host.substring(0, colon - 1), Integer.parseInt(host.substring(colon)));
+			setHost(host.substring(0, colon), Integer.parseInt(host.substring(colon + 1)));
 	}
 	
 	public void setTimeout(int timeout) {
@@ -65,7 +65,7 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 	
 	private void printData(boolean toSystem, String text) {
 		if (printStream != null && text.startsWith("@"))
-			System.out.println(String.format("%s Fox %s App %s",
+			printStream.println(String.format("%s Fox %s App %s",
 					(new SimpleDateFormat("HH:mm:ss.SSS")).format(Calendar.getInstance().getTime()),
 					toSystem ? "<--" : "-->",
 					text.trim()));

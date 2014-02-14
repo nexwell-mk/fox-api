@@ -24,7 +24,7 @@ public class FoxDevice {
 		return address;
 	}
 	
-	public String getType() {
+	public String getTypeString() {
 		return type;
 	}
 	

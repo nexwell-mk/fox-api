@@ -1,6 +1,6 @@
 package eu.nexwell.fox.api.core;
 
-public class FoxMessageBoot extends FoxMessage {
+class FoxMessageBoot extends FoxMessage {
 
 	public FoxMessageBoot() {
 		super();
