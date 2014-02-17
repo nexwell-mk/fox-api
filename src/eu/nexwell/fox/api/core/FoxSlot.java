@@ -70,6 +70,21 @@ public class FoxSlot {
 		return value;
 	}
 	
+	private ArrayList<Integer> convertArgAligned(int value, int align) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < align; i++)
+			result.add((value >> 8*i) & 0xff);
+		return result;
+	}
+	
+	protected ArrayList<Integer> convertArgAligned(int value, int minValue, int maxValue, int scale, int align) {
+		return convertArgAligned(convertArg(value, minValue, maxValue, scale), align);
+	}
+	
+	protected ArrayList<Integer> convertArgAligned(int value, int minValue, int maxValue, int align) {
+		return convertArgAligned(convertArg(value, minValue, maxValue), align);
+	}
+	
 	void setParentDevice(FoxDevice device) {
 		parentDevice = device;
 	}

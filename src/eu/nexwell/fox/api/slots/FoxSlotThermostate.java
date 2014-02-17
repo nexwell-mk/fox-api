@@ -1,5 +1,7 @@
 package eu.nexwell.fox.api.slots;
 
+import java.util.ArrayList;
+
 import eu.nexwell.fox.api.core.FoxException;
 import eu.nexwell.fox.api.core.FoxSlot;
 
@@ -13,8 +15,16 @@ public class FoxSlotThermostate extends FoxSlot {
 		writeSet(0x01);
 	}
 	
+	private void thresholdOperation(int cmd, double temperatureThreshold)  throws FoxException {
+		ArrayList<Integer> args = new ArrayList<Integer>();
+		args.add(cmd);
+		args.addAll(convertArgAligned((int) (10 * temperatureThreshold), -1200, 1200, 2));
+		Integer[] array = new Integer[args.size()];
+		writeSet(args.toArray(array));
+	}
+	
 	public void turnOn(double temperatureThreshold) throws FoxException {
-		writeSet(0x01, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
+		thresholdOperation(0x01, temperatureThreshold);
 	}
 	
 	public void turnOff() throws FoxException {
@@ -26,11 +36,11 @@ public class FoxSlotThermostate extends FoxSlot {
 	}
 	
 	public void toggle(double temperatureThreshold) throws FoxException {
-		writeSet(0x02, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
+		thresholdOperation(0x02, temperatureThreshold);
 	}
 	
 	public void setThreshold(double temperatureThreshold) throws FoxException {
-		writeSet(0x10, convertArg((int) (10 * temperatureThreshold), -1200, 1200));
+		thresholdOperation(0x10, temperatureThreshold);
 	}
 	
 	public boolean isOn() throws FoxException {
