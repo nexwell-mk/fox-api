@@ -8,9 +8,9 @@ import eu.nexwell.fox.api.slots.FoxSlotOutput;
 
 public class FoxDeviceDimm extends FoxDevice {
 
-	private final static int inputsCount = 8;
-	private final static int outputsCount = 7;
-	private final static int levelsCount = 7;
+	public final static int inputsCount = 8;
+	public final static int outputsCount = 7;
+	public final static int levelsCount = 7;
 	
 	public FoxDeviceDimm(int address) throws FoxException {
 		super(address);

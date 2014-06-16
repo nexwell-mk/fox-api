@@ -10,11 +10,11 @@ import eu.nexwell.fox.api.slots.FoxSlotThermostate;
 
 public class FoxDeviceTouch extends FoxDevice {
 
-	private final static int inputsCount = 7;
-	private final static int outputsCount = 7;
-	private final static int beepsCount = 1;
-	private final static int thermometerCount = 1;
-	private final static int thermostateCount = 4;
+	public final static int inputsCount = 7;
+	public final static int outputsCount = 7;
+	public final static int beepsCount = 1;
+	public final static int thermometerCount = 1;
+	public final static int thermostateCount = 4;
 	
 	public FoxDeviceTouch(int address) throws FoxException {
 		super(address);

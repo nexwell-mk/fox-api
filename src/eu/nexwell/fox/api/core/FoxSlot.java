@@ -88,4 +88,16 @@ public class FoxSlot {
 	void setParentDevice(FoxDevice device) {
 		parentDevice = device;
 	}
+	
+	public void label(int label) throws FoxException {
+		if (parentDevice == null)
+			throw new FoxException("Null parent device");
+		parentDevice.getParentSystem().label(label, this);
+	}
+	
+	public void label(String label) throws FoxException {
+		if (parentDevice == null)
+			throw new FoxException("Null parent device");
+		parentDevice.getParentSystem().label(label, this);
+	}
 }

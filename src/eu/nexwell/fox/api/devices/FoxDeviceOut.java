@@ -9,9 +9,9 @@ import eu.nexwell.fox.api.slots.FoxSlotPushPull;
 
 public class FoxDeviceOut extends FoxDevice {
 
-	private final static int inputsCount = 8;
-	private final static int outputsCount = 8;
-	private final static int pushPullsCount = 4;
+	public final static int inputsCount = 8;
+	public final static int outputsCount = 8;
+	public final static int pushPullsCount = 4;
 	
 	public FoxDeviceOut(int address) throws FoxException {
 		super(address);

@@ -16,10 +16,14 @@ public class Fox {
 	public final static int maxDeviceAddress = maxDevicesCount - 1;
 	
 	private TreeMap<Integer, FoxDevice> devices;
+	private TreeMap<Integer, FoxSlot> numberLabels;
+	private TreeMap<String, FoxSlot> textLabels;
 	private FoxMessenger messenger = null;
 	
 	public Fox() {
 		devices = new TreeMap<Integer, FoxDevice>();
+		numberLabels = new TreeMap<Integer, FoxSlot>();
+		textLabels = new TreeMap<String, FoxSlot>();
 	}
 	
 	public void setMessenger(FoxMessenger messenger) {
@@ -111,5 +115,33 @@ public class Fox {
 		if (messenger == null)
 			throw new FoxException("Null messenger");
 		msg.interpret(messenger.read().trim());
+	}
+	
+	void label(int label, FoxSlot slot) throws FoxException {
+		if (slot == null)
+			throw new FoxException("Slot cannot be null");
+		if (numberLabels.containsKey(label))
+			throw new FoxException(String.format("Label (%d) must be unique", label));
+		numberLabels.put(label, slot);
+	}
+	
+	void label(String label, FoxSlot slot) throws FoxException {
+		if (label == null)
+			throw new FoxException("Label cannot be null");
+		if (label.isEmpty())
+			throw new FoxException("Label cannot be empty");
+		if (slot == null)
+			throw new FoxException("Slot cannot be null");
+		if (textLabels.containsKey(label))
+			throw new FoxException(String.format("Label (%s) must be unique", label));
+		textLabels.put(label, slot);
+	}
+	
+	public FoxSlot get(int label) {
+		return numberLabels.get(label);
+	}
+	
+	public FoxSlot get(String label) {
+		return textLabels.get(label);
 	}
 }

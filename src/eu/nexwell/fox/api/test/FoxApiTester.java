@@ -22,6 +22,7 @@ public class FoxApiTester {
 			
 			test = new FoxApiTestSlots();
 			//test = new FoxApiTestSearch();
+			//test = new FoxApiTestLabels();
 			
 			test.run(fox);
 			
