@@ -7,6 +7,7 @@ import eu.nexwell.fox.api.core.FoxException;
 import eu.nexwell.fox.api.devices.FoxDeviceDimm;
 import eu.nexwell.fox.api.devices.FoxDeviceLed;
 import eu.nexwell.fox.api.devices.FoxDeviceOut;
+import eu.nexwell.fox.api.devices.FoxDeviceSet;
 import eu.nexwell.fox.api.devices.FoxDeviceTouch;
 import eu.nexwell.fox.api.slots.FoxSlotPushPull.Sequence;
 
@@ -16,9 +17,10 @@ public class FoxApiTestSlots implements FoxApiTest {
 	public void run(Fox fox) throws FoxException {
 		
 		FoxDeviceTouch foxTouch = (FoxDeviceTouch) fox.addDevice(new FoxDeviceTouch(0));
-		FoxDeviceOut foxOut = (FoxDeviceOut) fox.addDevice(new FoxDeviceOut(1));
-		FoxDeviceDimm foxDimm = (FoxDeviceDimm) fox.addDevice(new FoxDeviceDimm(2));
-		FoxDeviceLed foxLed = (FoxDeviceLed) fox.addDevice(new FoxDeviceLed(3));
+		FoxDeviceSet foxSet = (FoxDeviceSet) fox.addDevice(new FoxDeviceSet(1));
+		FoxDeviceOut foxOut = (FoxDeviceOut) fox.addDevice(new FoxDeviceOut(2));
+		FoxDeviceDimm foxDimm = (FoxDeviceDimm) fox.addDevice(new FoxDeviceDimm(3));
+		FoxDeviceLed foxLed = (FoxDeviceLed) fox.addDevice(new FoxDeviceLed(4));
 		
 		foxOut.getOutput(0).toggle();
 		System.out.println(String.format("Output is %s",
@@ -47,6 +49,9 @@ public class FoxApiTestSlots implements FoxApiTest {
 		System.out.println(String.format("Thermostates: %b %b",
 				foxTouch.getThermostate(0).isActive(),
 				foxTouch.getThermostate(1).isActive()));
+		
+		foxSet.getPrint().writeTopLeft("Hello");
+		foxSet.getPrint().writeBottomRight("World!");
 		
 		foxDimm.getDimmer(0).toggle();
 		foxDimm.getDimmer(1).turnOn(0.25f);
