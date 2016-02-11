@@ -17,6 +17,7 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 	String host = "";
 	int port = 0;
 	int timeout = 250;
+	String password = null;
 	PrintStream printStream = null;
 	
 	Socket socket;
@@ -44,6 +45,10 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 		this.timeout = timeout;
 	}
 	
+	public void setPassword(String password) {
+		this.password = (password != null && password.length() > 0) ? password : null;
+	}
+	
 	public void setPrintStream(PrintStream printStream) {
 		this.printStream = printStream;
 	}
@@ -55,8 +60,39 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 			socket.setSoTimeout(timeout);
 			toServer = new PrintWriter(socket.getOutputStream(),true);
 			fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			String prompt = read();
-			if (!prompt.equals("> Fox terminal"))
+
+			boolean promptOk = false;
+			StringBuilder sb = new StringBuilder();
+			for (;;) {
+				int value = fromServer.read();
+				if (value < 0)
+					break;
+				
+				sb.append((char) value);
+				String prompt = sb.toString();
+				
+				if (prompt.equals("pass: ")) {
+					if (password != null) {
+						toServer.println(password + "\n");
+						sb = new StringBuilder();
+					}
+					else {
+						throw new FoxException("Password demand but no password set");
+					}
+				}
+				else
+				if (prompt.equals("> Fox terminal")) {
+					promptOk = true;
+					fromServer.readLine();
+					break;
+				}
+				else
+				if (prompt.equals("ACCESS DENIED")) {
+					throw new FoxException("Password rejected, access denied");
+				}
+			}
+			
+			if (!promptOk)
 				throw new FoxException("Wrong prompt received");
 		} catch (IOException e) {
 			throw new FoxException(e.getMessage());
@@ -78,12 +114,28 @@ public class FoxMessengerTcpIp implements FoxMessenger {
 		readEcho(text);
 	}
 	
+	private String purify(String line) {
+		while (line.length() > 0) {
+			char start = line.charAt(0);
+			if (start < 0x20 || start > 0x7f) {
+				if (line.length() > 1)
+					line = line.substring(1);
+				else
+					line = "";
+			}
+			else {
+				return line;
+			}
+		}
+		return line;
+	}
+	
 	private String readLine() {
 		try {
 			String line = fromServer.readLine();
 			if (line == null)
 				line = "";
-			return line;
+			return purify(line);
 		} catch (IOException e) {
 			return "";
 		}
