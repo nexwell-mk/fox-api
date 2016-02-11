@@ -16,6 +16,8 @@ public class FoxApiTestSlots implements FoxApiTest {
 	@Override
 	public void run(Fox fox) throws FoxException {
 		
+		System.out.println("TEST: SLOTS");
+		
 		FoxDeviceTouch foxTouch = (FoxDeviceTouch) fox.addDevice(new FoxDeviceTouch(0));
 		FoxDeviceSet foxSet = (FoxDeviceSet) fox.addDevice(new FoxDeviceSet(1));
 		FoxDeviceOut foxOut = (FoxDeviceOut) fox.addDevice(new FoxDeviceOut(2));

@@ -9,6 +9,8 @@ public class FoxApiTestSearch implements FoxApiTest {
 	@Override
 	public void run(Fox fox) throws FoxException {
 		
+		System.out.println("TEST: SEARCH");
+		
 		fox.addDevices(fox.searchDevices());
 		
 		for (FoxDevice dev : fox.getDevices())

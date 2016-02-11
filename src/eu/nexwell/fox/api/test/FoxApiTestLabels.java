@@ -14,10 +14,12 @@ public class FoxApiTestLabels implements FoxApiTest {
 	@Override
 	public void run(Fox fox) throws FoxException {
 		
+		System.out.println("TEST: LABELS");
+		
 		FoxDeviceTouch foxTouch = (FoxDeviceTouch) fox.addDevice(new FoxDeviceTouch(0));
-		FoxDeviceOut foxOut = (FoxDeviceOut) fox.addDevice(new FoxDeviceOut(1));
-		FoxDeviceDimm foxDimm = (FoxDeviceDimm) fox.addDevice(new FoxDeviceDimm(2));
-		FoxDeviceLed foxLed = (FoxDeviceLed) fox.addDevice(new FoxDeviceLed(3));
+		FoxDeviceOut foxOut = (FoxDeviceOut) fox.addDevice(new FoxDeviceOut(2));
+		FoxDeviceDimm foxDimm = (FoxDeviceDimm) fox.addDevice(new FoxDeviceDimm(3));
+		FoxDeviceLed foxLed = (FoxDeviceLed) fox.addDevice(new FoxDeviceLed(4));
 		
 		foxTouch.getButton(0).label("foo");
 		foxTouch.getButton(1).label("bar");
