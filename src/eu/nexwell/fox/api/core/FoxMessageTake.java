@@ -7,6 +7,10 @@ class FoxMessageTake extends FoxMessage {
 	private int slotIndex;
 	private String takeArgs;
 	
+	public FoxMessageTake() {
+		super();
+	}
+	
 	@Override
 	protected void prepareMessage() {
 		

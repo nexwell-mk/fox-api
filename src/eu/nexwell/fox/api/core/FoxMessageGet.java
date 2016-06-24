@@ -6,6 +6,7 @@ class FoxMessageGet extends FoxMessage {
 	int slotIndex;
 	
 	public FoxMessageGet() {
+		super();
 		slotIndex = 0;
 	}
 	

@@ -13,6 +13,7 @@ public class FoxApiTester {
 		try {
 			ArrayList<FoxApiTest> tests = new ArrayList<FoxApiTest>();
 			tests.add(new FoxApiTestSlots());
+			tests.add(new FoxApiTestTasks());
 			tests.add(new FoxApiTestSearch());
 			tests.add(new FoxApiTestLabels());
 			

@@ -8,6 +8,7 @@ class FoxMessageSet extends FoxMessage {
 	String setArgs;
 	
 	public FoxMessageSet() {
+		super();
 		slotIndex = 0;
 		setArgs = "";
 	}

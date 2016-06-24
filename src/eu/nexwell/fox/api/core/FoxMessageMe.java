@@ -7,6 +7,10 @@ class FoxMessageMe extends FoxMessage {
 	private String type = "";
 	private String version = "";
 	
+	public FoxMessageMe() {
+		super();
+	}
+	
 	@Override
 	protected void prepareMessage() {
 		

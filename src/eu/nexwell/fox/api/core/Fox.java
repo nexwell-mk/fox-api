@@ -7,6 +7,7 @@ import eu.nexwell.fox.api.devices.FoxDeviceDimm;
 import eu.nexwell.fox.api.devices.FoxDeviceLed;
 import eu.nexwell.fox.api.devices.FoxDeviceNet;
 import eu.nexwell.fox.api.devices.FoxDeviceOut;
+import eu.nexwell.fox.api.devices.FoxDeviceSet;
 import eu.nexwell.fox.api.devices.FoxDeviceTouch;
 
 public class Fox {
@@ -89,6 +90,9 @@ public class Fox {
 			else
 			if (type.equals("nxw.fox.touch"))
 				device = new FoxDeviceTouch(i);
+			else
+			if (type.equals("nxw.fox.set"))
+				device = new FoxDeviceSet(i);
 			
 			if (device != null)
 				devices.add(device);
@@ -99,7 +103,12 @@ public class Fox {
 	
 	public void reboot() throws FoxException {
 		FoxMessageBoot msg = new FoxMessageBoot();
-		msg.setDeviceAll();
+		write(msg);
+	}
+	
+	public void doTask(int id) throws FoxException {
+		FoxMessageDoTask msg = new FoxMessageDoTask();
+		msg.setTaskId(id);
 		write(msg);
 	}
 	
